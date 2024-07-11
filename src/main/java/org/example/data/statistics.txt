@@ -1,0 +1,43 @@
+All Statistics:
+
+ Class 1:
+    Survived: 62.96296296296296%
+    didn't Survive: 37.03703703703704%
+ Class 2:
+    Survived: 47.28260869565217%
+    didn't Survive: 52.71739130434783%
+ Class 3:
+    Survived: 24.236252545824847%
+    didn't Survive: 75.76374745417515%
+
+ Embark S:
+    Survived: 33.69565217391305%
+    didn't Survive: 66.30434782608695%
+ Embark C:
+    Survived: 55.357142857142854%
+    didn't Survive: 44.642857142857146%
+ Embark Q:
+    Survived: 38.96103896103896%
+    didn't Survive: 61.03896103896104%
+
+ Gender:
+    Survived Males: 18.890814558058924%
+    Survived Females: 33.238231098430816%
+
+ Family and Friends:
+    Survived with Family: 50.56497175141243%
+    Survived without Family: 30.353817504655492%
+
+ Age Groups:
+    Survived: up to 10 : 59.375%
+    Survived: up to 20 : 38.26086956521739%
+    Survived: up to 30 : 36.68122270742358%
+    Survived: up to 40 : 45.09803921568628%
+    Survived: up to 50 : 39.285714285714285%
+    Survived: more than 50 : 34.375%
+
+ Fare Price Groups:
+    Survived: up to 10 : 19.94047619047619%
+    Survived: up to 30 : 43.55400696864111%
+    Survived: more than 30 : 58.75%
+
