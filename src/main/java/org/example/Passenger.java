@@ -36,7 +36,7 @@ public class Passenger implements Comparable<Passenger>{
     }
 
     public String ageGroup(){
-        String res ="";
+        String res ="N/A";
         if(this.age>=Constants.AGE_GROUP_UP_TO_10[0] && this.age<=Constants.AGE_GROUP_UP_TO_10[1]){res=Constants.AGE_GROUP_NAME_UP_TO_10;}
         if(this.age>=Constants.AGE_GROUP_UP_TO_20[0] && this.age<=Constants.AGE_GROUP_UP_TO_20[1]){res=Constants.AGE_GROUP_NAME_UP_TO_20;}
         if(this.age>=Constants.AGE_GROUP_UP_TO_30[0] && this.age<=Constants.AGE_GROUP_UP_TO_30[1]){res=Constants.AGE_GROUP_NAME_UP_TO_30;}
@@ -48,7 +48,7 @@ public class Passenger implements Comparable<Passenger>{
 
 
     public String farePriceGroup(){
-        String res ="";
+        String res ="N/A";
         if(this.fare<=Constants.FARE_PRICE_GROUP10){res=Constants.FARE_PRICE_GROUP_NAME_10;}
         if(this.fare>=Constants.FARE_PRICE_GROUP30[0] && this.fare<=Constants.FARE_PRICE_GROUP30[1]){res=Constants.FARE_PRICE_GROUP_NAME_30;}
         if(this.fare>=Constants.FARE_PRICE_GROUP30_PLUS){res=Constants.FARE_PRICE_GROUP_NAME_30_PLUS;}
@@ -247,7 +247,7 @@ public class Passenger implements Comparable<Passenger>{
     }
 
     public String getEmbarkLocation() {
-        return embarkLocation ==null ? "" : embarkLocation;
+        return embarkLocation ==null ? "N/A" : embarkLocation;
     }
 
     public String getFormattedName(){

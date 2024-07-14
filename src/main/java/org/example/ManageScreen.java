@@ -1,25 +1,29 @@
 package org.example;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.FilterInputStream;
 
 
 public class ManageScreen extends JPanel {
+
     private JComboBox<String> passengerClassComboBox;
     private JTextField passengerNameFilter;
     private JTextField passengerIDMinFilter;
     private JTextField passengerIDMaxFilter;
-    private JTextField passengerGenderFilter;
+    private JComboBox<String> passengerGenderFilter;
     private JTextField amountParAndSibFilter;
     private JTextField amountKidsAndParentsFilter;
     private JTextField ticketFilter;
     private JTextField fareMinFilter;
     private JTextField fareMaxFilter;
     private JTextField cabinNumFilter;
-    private JTextField embarkFilter;
+    private JComboBox<String> embarkFilter;
     private FilterByChoise filterByChoise;
     private JButton filter;
+    private JButton statistics;
+    private JComboBox<String> aggDataComboBox;
+    //private MyKeyListener keyListener;
     public ManageScreen(int x, int y, int width, int height) {
         File file = new File(Constants.PATH_TO_DATA_FILE); //this is the path to the data file
         if (file.exists()) {
@@ -27,10 +31,10 @@ public class ManageScreen extends JPanel {
             this.setBounds(x, y + Constants.MARGIN_FROM_TOP, width, height);
             addTextFilterBoxes(x,y);
             addFilterJbutton();
-            this.passengerClassComboBox.addActionListener((e) -> {
-                //do whatever you want on change
+            addStatisticsJbutton();
+            addAggDataCombox();
 
-            });
+
         }
         else{
             System.out.println("couldndt find file");
@@ -41,16 +45,34 @@ public class ManageScreen extends JPanel {
     public void addFilterJbutton(){
         this.filterByChoise = new FilterByChoise();
         this.filter = new JButton("Filter");
-        this.filter.setBounds(300,50,120,100);
+        this.filter.setBounds(300,0+Constants.MARGIN_FROM_TOP,100,100);
         this.add(this.filter);
-        this.filter.setBackground(Color.white);
+        this.filter.setBackground(Color.GRAY);
         this.filter.addActionListener(e -> {
             JLabel dialogMassage=new JLabel();
-            JOptionPane.showMessageDialog(dialogMassage,  filter()
+            JOptionPane.showMessageDialog(dialogMassage,  filter());
+        });
+    }
 
 
-                    );
+    public void addStatisticsJbutton(){
+        this.statistics = new JButton("Statistics");
+        this.statistics.setBounds(300,100+Constants.MARGIN_FROM_TOP,100,100);
+        this.add(this.statistics);
+        this.statistics.setBackground(Color.GRAY);
+        this.statistics.addActionListener(e -> { this.filterByChoise.createStatsFile();   });
+    }
 
+    public void addAggDataCombox(){
+        this.aggDataComboBox = new JComboBox<>(Constants.AGG_DATA_OPTIONS);
+        this.aggDataComboBox.setBounds(300,200+Constants.MARGIN_FROM_TOP*2,100,100);
+        this.add(this.aggDataComboBox);
+        this.aggDataComboBox.setBackground(Color.GRAY);
+        this.aggDataComboBox.addActionListener(e -> {
+            JLabel dialogMassage=new JLabel();
+            if(!aggDataComboBox.getSelectedItem().toString().equals(Constants.AGG_DATA_OPTIONS[0])) {
+                JOptionPane.showMessageDialog(dialogMassage, this.filterByChoise.aggregateDataByColumns(aggDataComboBox.getSelectedItem().toString()));
+            }
 
         });
     }
@@ -63,14 +85,14 @@ public class ManageScreen extends JPanel {
                 this.passengerNameFilter.getText(),
                 this.passengerIDMinFilter.getText(),
                 this.passengerIDMaxFilter.getText(),
-                this.passengerGenderFilter.getText(),
+                this.passengerGenderFilter.getSelectedItem().toString(),
                 this.amountParAndSibFilter.getText(),
                 this.amountKidsAndParentsFilter.getText(),
                 this.ticketFilter.getText(),
                 this.fareMinFilter.getText(),
                 this.fareMaxFilter.getText(),
                 this.cabinNumFilter.getText(),
-                this.embarkFilter.getText() );
+                this.embarkFilter.getSelectedItem().toString() );
     }
 
 
@@ -86,7 +108,7 @@ public class ManageScreen extends JPanel {
         JLabel fareMinLable = new JLabel("Passenger Min Fare: ");
         JLabel fareMaxLable = new JLabel("Passenger max Fare: ");
         JLabel cabinNumLable = new JLabel("Passenger's Cabin: ");
-        JLabel embarkLable = new JLabel("Passenger Embarkation: ");
+        JLabel embarkLable = new JLabel("Passenger's Embark: ");
         survivedLabel.setBounds(x + Constants.MARGIN_FROM_LEFT, y+(Constants.LABEL_HEIGHT*0 + Constants.MARGIN_FROM_TOP), Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         passengerNameLable.setBounds(x + Constants.MARGIN_FROM_LEFT, y + (Constants.LABEL_HEIGHT*1 + Constants.MARGIN_FROM_TOP), Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
         passengerIDMinLable.setBounds(x + Constants.MARGIN_FROM_LEFT, y + (Constants.LABEL_HEIGHT*2 + Constants.MARGIN_FROM_TOP), Constants.LABEL_WIDTH, Constants.LABEL_HEIGHT);
@@ -117,14 +139,15 @@ public class ManageScreen extends JPanel {
         this.passengerNameFilter = new JTextField();
         this.passengerIDMinFilter = new JTextField();
         this.passengerIDMaxFilter = new JTextField();
-        this.passengerGenderFilter = new JTextField();
+        this.passengerGenderFilter = new JComboBox<>(Constants.PASSENGER_GENDER_OPTIONS);
         this.amountParAndSibFilter = new JTextField();
         this.amountKidsAndParentsFilter = new JTextField();
         this.ticketFilter= new JTextField();
         this.fareMinFilter = new JTextField();
         this.fareMaxFilter = new JTextField();
         this.cabinNumFilter = new JTextField();
-        this.embarkFilter = new JTextField();
+        this.embarkFilter = new JComboBox<>(Constants.PASSENGER_EMBARK_OPTIONS);
+        this.aggDataComboBox=new JComboBox<>(Constants.AGG_DATA_OPTIONS);
 
         this.passengerClassComboBox.setBounds(x + Constants.MARGIN_FROM_LEFT + Constants.LABEL_WIDTH, y+ (Constants.LABEL_HEIGHT*0 + Constants.MARGIN_FROM_TOP), Constants.ALL_FILTER_WIDTH, Constants.ALL_FILTER_HEIGHT);
         this.passengerNameFilter.setBounds(x + Constants.MARGIN_FROM_LEFT + Constants.LABEL_WIDTH,y + (Constants.LABEL_HEIGHT*1 + Constants.MARGIN_FROM_TOP),Constants.ALL_FILTER_WIDTH, Constants.ALL_FILTER_HEIGHT);
@@ -138,8 +161,17 @@ public class ManageScreen extends JPanel {
         this.fareMaxFilter.setBounds(x + Constants.MARGIN_FROM_LEFT + Constants.LABEL_WIDTH,y + (Constants.LABEL_HEIGHT*9 + Constants.MARGIN_FROM_TOP),Constants.ALL_FILTER_WIDTH, Constants.ALL_FILTER_HEIGHT);
         this.cabinNumFilter.setBounds(x + Constants.MARGIN_FROM_LEFT + Constants.LABEL_WIDTH,y + (Constants.LABEL_HEIGHT*10 + Constants.MARGIN_FROM_TOP),Constants.ALL_FILTER_WIDTH, Constants.ALL_FILTER_HEIGHT);
         this.embarkFilter.setBounds(x + Constants.MARGIN_FROM_LEFT + Constants.LABEL_WIDTH,y + (Constants.LABEL_HEIGHT*11 + Constants.MARGIN_FROM_TOP),Constants.ALL_FILTER_WIDTH, Constants.ALL_FILTER_HEIGHT);
+        this.passengerClassComboBox.setBackground(Color.WHITE);
+        this.embarkFilter.setBackground(Color.WHITE);
+        this.passengerGenderFilter.setBackground(Color.WHITE);
 
 
+        passengerIDMinFilter.addKeyListener(new MyKeyListener(passengerIDMinFilter));
+        passengerIDMaxFilter.addKeyListener(new MyKeyListener(passengerIDMaxFilter));
+        amountParAndSibFilter.addKeyListener(new MyKeyListener(amountParAndSibFilter));
+        amountKidsAndParentsFilter.addKeyListener(new MyKeyListener(amountKidsAndParentsFilter));
+        fareMinFilter.addKeyListener(new MyKeyListener(fareMinFilter));
+        fareMaxFilter.addKeyListener(new MyKeyListener(fareMaxFilter));
 
 
         this.add(this.passengerClassComboBox);

@@ -1,9 +1,7 @@
 package org.example;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FilterByChoise {
@@ -19,12 +17,11 @@ public class FilterByChoise {
         this.fileNumber = 1;
         this.passengers = new ArrayList<>();
         createPassengerList();
-        createStatsFile();
 
 
     }
 
-    private void createStatsFile(){
+    public void createStatsFile(){
         statisticsFile = new File(Constants.PATH_TO_STATISTICS_FILE);
         try {
             statsWiter = new PrintWriter(statisticsFile);
@@ -55,14 +52,14 @@ public class FilterByChoise {
         double didntSurvive3=classToSurvieInEach.get(3).get(false).size();
         double survived3=classToSurvieInEach.get(3).get(true).size();
             resLines+=" Class 1:"+"\n";
-            resLines+="    Survived: "+survived1*Constants.PERCENT/(survived1+didntSurvive1)+"%\n";
-            resLines+="    didn't Survive: "+didntSurvive1*Constants.PERCENT/(survived1+didntSurvive1)+"%\n";
+            resLines+="    Survived: "+String.format("%.2f", survived1*Constants.PERCENT/(survived1+didntSurvive1))+"%\n";
+            resLines+="    didn't Survive: "+String.format("%.2f", didntSurvive1*Constants.PERCENT/(survived1+didntSurvive1))+"%\n";
             resLines+=" Class 2:"+"\n";
-            resLines+="    Survived: "+survived2*Constants.PERCENT/(survived2+didntSurvive2)+"%\n";
-            resLines+="    didn't Survive: "+didntSurvive2*Constants.PERCENT/(survived2+didntSurvive2)+"%\n";
+            resLines+="    Survived: "+String.format("%.2f", survived2*Constants.PERCENT/(survived2+didntSurvive2))+"%\n";
+            resLines+="    didn't Survive: "+String.format("%.2f", didntSurvive2*Constants.PERCENT/(survived2+didntSurvive2))+"%\n";
             resLines+=" Class 3:"+"\n";
-            resLines+="    Survived: "+survived3*Constants.PERCENT/(survived3+didntSurvive3)+"%\n";
-            resLines+="    didn't Survive: "+didntSurvive3*Constants.PERCENT/(survived3+didntSurvive3)+"%\n";
+            resLines+="    Survived: "+String.format("%.2f", survived3*Constants.PERCENT/(survived3+didntSurvive3))+"%\n";
+            resLines+="    didn't Survive: "+String.format("%.2f", didntSurvive3*Constants.PERCENT/(survived3+didntSurvive3))+"%\n";
 
         return resLines;
 
@@ -82,14 +79,14 @@ public class FilterByChoise {
         double didntSurviveQ=embarkToSurvieInEach.get(Constants.EMBARK_Q).get(false).size();
         double survivedQ=embarkToSurvieInEach.get(Constants.EMBARK_Q).get(true).size();
         resLines+=" Embark S:\n";
-        resLines+="    Survived: "+survivedS*Constants.PERCENT/(survivedS+didntSurviveS)+"%\n";
-        resLines+="    didn't Survive: "+didntSurviveS*Constants.PERCENT/(survivedS+didntSurviveS)+"%\n";
+        resLines+="    Survived: "+String.format("%.2f", survivedS*Constants.PERCENT/(survivedS+didntSurviveS))+"%\n";
+        resLines+="    didn't Survive: "+String.format("%.2f", didntSurviveS*Constants.PERCENT/(survivedS+didntSurviveS))+"%\n";
         resLines+=" Embark C:"+"\n";
-        resLines+="    Survived: "+survivedC*Constants.PERCENT/(survivedC+didntSurviveC)+"%\n";
-        resLines+="    didn't Survive: "+didntSurviveC*Constants.PERCENT/(survivedC+didntSurviveC)+"%\n";
+        resLines+="    Survived: "+String.format("%.2f", survivedC*Constants.PERCENT/(survivedC+didntSurviveC))+"%\n";
+        resLines+="    didn't Survive: "+String.format("%.2f", didntSurviveC*Constants.PERCENT/(survivedC+didntSurviveC))+"%\n";
         resLines+=" Embark Q:"+"\n";
-        resLines+="    Survived: "+survivedQ*Constants.PERCENT/(survivedQ+didntSurviveQ)+"%\n";
-        resLines+="    didn't Survive: "+didntSurviveQ*Constants.PERCENT/(survivedQ+didntSurviveQ)+"%\n";
+        resLines+="    Survived: "+String.format("%.2f", survivedQ*Constants.PERCENT/(survivedQ+didntSurviveQ))+"%\n";
+        resLines+="    didn't Survive: "+String.format("%.2f", didntSurviveQ*Constants.PERCENT/(survivedQ+didntSurviveQ))+"%\n";
         return resLines;
 
 
@@ -107,8 +104,8 @@ public class FilterByChoise {
         double didntSurviveFemail=genderToSurvieInEach.get(Constants.GENDER_MALE).get(false).size();
         double survivedFemail=genderToSurvieInEach.get(Constants.GENDER_FEMALE).get(true).size();
         resLines+=" Gender:"+"\n";
-        resLines+="    Survived Males: "+survivedMale*Constants.PERCENT/(didntSurviveMale+survivedMale)+"%\n";
-        resLines+="    Survived Females: "+survivedFemail*Constants.PERCENT/(survivedFemail+didntSurviveFemail)+"%\n";
+        resLines+="    Survived Males: "+String.format("%.2f", survivedMale*Constants.PERCENT/(didntSurviveMale+survivedMale))+"%\n";
+        resLines+="    Survived Females: "+String.format("%.2f", survivedFemail*Constants.PERCENT/(survivedFemail+didntSurviveFemail))+"%\n";
         return resLines;
 
     }
@@ -125,8 +122,8 @@ public class FilterByChoise {
         double noFamilydidntSurvive=familyToSurvieInEach.get(false).get(false).size();
         double noFamilySurvive=familyToSurvieInEach.get(false).get(true).size();
         resLines+=" Family and Friends:"+"\n";
-        resLines+="    Survived with Family: "+hasFamilySurvive*Constants.PERCENT/(hasFamilySurvive+hasFamilydidntSurvive)+"%\n";
-        resLines+="    Survived without Family: "+noFamilySurvive*Constants.PERCENT/(noFamilydidntSurvive+noFamilySurvive)+"%\n";
+        resLines+="    Survived with Family: "+String.format("%.2f", hasFamilySurvive*Constants.PERCENT/(hasFamilySurvive+hasFamilydidntSurvive))+"%\n";
+        resLines+="    Survived without Family: "+String.format("%.2f", noFamilySurvive*Constants.PERCENT/(noFamilydidntSurvive+noFamilySurvive))+"%\n";
         return resLines;
 
     }
@@ -158,12 +155,12 @@ public class FilterByChoise {
 
 
         resLines+=" Age Groups:"+"\n";
-        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_10+" : "+survived10*Constants.PERCENT/(survived10+didntSurvive10)+"%\n";
-        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_20+" : "+survived20*Constants.PERCENT/(survived20+didntSurvive20)+"%\n";
-        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_30+" : "+survived30*Constants.PERCENT/(survived30+didntSurvive30)+"%\n";
-        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_40+" : "+survived40*Constants.PERCENT/(survived40+didntSurvive40)+"%\n";
-        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_50+" : "+survived50*Constants.PERCENT/(survived50+didntSurvive50)+"%\n";
-        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_SENIOR+" : "+survivedSenior*Constants.PERCENT/(survivedSenior+didntSurviveSenior)+"%\n";
+        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_10+" : "+String.format("%.2f", survived10*Constants.PERCENT/(survived10+didntSurvive10))+"%\n";
+        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_20+" : "+String.format("%.2f", survived20*Constants.PERCENT/(survived20+didntSurvive20))+"%\n";
+        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_30+" : "+String.format("%.2f", survived30*Constants.PERCENT/(survived30+didntSurvive30))+"%\n";
+        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_40+" : "+String.format("%.2f", survived40*Constants.PERCENT/(survived40+didntSurvive40))+"%\n";
+        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_UP_TO_50+" : "+String.format("%.2f", survived50*Constants.PERCENT/(survived50+didntSurvive50))+"%\n";
+        resLines+="    Survived: "+Constants.AGE_GROUP_NAME_SENIOR+" : "+String.format("%.2f", survivedSenior*Constants.PERCENT/(survivedSenior+didntSurviveSenior))+"%\n";
 
         return resLines;
 
@@ -189,14 +186,13 @@ public class FilterByChoise {
 
 
         resLines+=" Fare Price Groups:"+"\n";
-        resLines+="    Survived: "+Constants.FARE_PRICE_GROUP_NAME_10+" : "+survived10*Constants.PERCENT/(survived10+didntSurvive10)+"%\n";
-        resLines+="    Survived: "+Constants.FARE_PRICE_GROUP_NAME_30+" : "+survived30*Constants.PERCENT/(survived30+didntSurvive30)+"%\n";
-        resLines+="    Survived: "+Constants.FARE_PRICE_GROUP_NAME_30_PLUS+" : "+survived30Plus*Constants.PERCENT/(survived30Plus+didntSurvive30Plus)+"%\n";
+        resLines+="    Survived: "+Constants.FARE_PRICE_GROUP_NAME_10+" : "+String.format("%.2f", survived10*Constants.PERCENT/(survived10+didntSurvive10))+"%\n";
+        resLines+="    Survived: "+Constants.FARE_PRICE_GROUP_NAME_30+" : "+String.format("%.2f", survived30*Constants.PERCENT/(survived30+didntSurvive30))+"%\n";
+        resLines+="    Survived: "+Constants.FARE_PRICE_GROUP_NAME_30_PLUS+" : "+String.format("%.2f", survived30Plus*Constants.PERCENT/(survived30Plus+didntSurvive30Plus))+"%\n";
 
         return resLines;
 
     }
-
 
 
 
@@ -249,6 +245,67 @@ public class FilterByChoise {
                 countSurvived(this.filteredPassengers) +" dead "+ ( countNotSurvived(this.filteredPassengers));
         createNewFileToStoreFilter();
         return result;
+    }
+
+
+    public String aggregateDataByColumns(String groupBy){
+        Float allCnt =Float.valueOf( passengers.size());
+        String res = "";
+        Map<String,Float> aggDataMap= new HashMap<>();
+        switch (groupBy) {
+            case (Constants.AGG_DATA_CLASS):
+            aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                            passenger -> Integer.toString(passenger.getpClass()),
+                            Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                    ));
+            break;
+            case (Constants.AGG_DATA_SURVIVE):
+                aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                        passenger -> (passenger.isSurvived() )== true ? "yes" : "no",
+                        Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                ));
+                break;
+            case (Constants.AGG_DATA_GENDER):
+                aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                        passenger -> (passenger.getGender()),
+                        Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                ));
+                break;
+            case (Constants.AGG_DATA_AGE):
+                aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                        passenger -> ( passenger.ageGroup()),
+                        Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                ));
+                break;
+            case (Constants.AGG_DATA_FAMILY):
+                aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                        passenger -> (passenger.hasFamilyOrPartners())==true ? "has" : "doesn't",
+                        Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                ));
+                break;
+            case (Constants.AGG_DATA_FARE):
+                aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                        passenger -> (passenger.farePriceGroup()),
+                        Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                ));
+                break;
+            case (Constants.AGG_DATA_EMBARK):
+                aggDataMap = passengers.stream().collect(Collectors.groupingBy(
+                        passenger -> (passenger.getEmbarkLocation()),
+                        Collectors.collectingAndThen(Collectors.counting(), count -> (count * Constants.PERCENT / allCnt))
+                ));
+                break;
+
+        }
+        for( Map.Entry<String, Float> entries :aggDataMap.entrySet() ){
+            System.out.println(entries.getKey() + ": " +String.format("%.2f", entries.getValue())+"%" );
+            res +=entries.getKey() + ": " +String.format("%.2f", entries.getValue())+"%\n";
+
+        }
+
+
+        return res;
+
     }
 
 

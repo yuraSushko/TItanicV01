@@ -10,6 +10,17 @@ public class Constants {
     public static final int WINDOW_HEIGHT = 600;
     public static final String[] PASSENGER_CLASS_OPTIONS = {"All", "1st", "2nd", "3rd"};
 
+    public static final String AGG_DATA_SURVIVE = "Survived";
+    public static final String AGG_DATA_CLASS = "Class";
+    public static final String AGG_DATA_GENDER = "Gender";
+    public static final String AGG_DATA_AGE = "Age";
+    public static final String AGG_DATA_FAMILY = "Family";
+    public static final String AGG_DATA_FARE = "Fare";
+    public static final String AGG_DATA_EMBARK = "Embarked";
+    public static final String[] AGG_DATA_OPTIONS = {"Aggregate Data",AGG_DATA_SURVIVE, AGG_DATA_CLASS, AGG_DATA_GENDER,AGG_DATA_AGE,AGG_DATA_FAMILY,AGG_DATA_FARE,AGG_DATA_EMBARK};
+
+
+
     public static final int PASSENGER_ALL_CLASS = 0;
     public static final int PASSENGER_FIRST_CLASS = 1;
     public static final int PASSENGER_SECOND_CLASS = 2;
@@ -24,6 +35,7 @@ public class Constants {
 
     public static final String  GENDER_MALE = "male";
     public static final String  GENDER_FEMALE = "female";
+    public static final String[] PASSENGER_GENDER_OPTIONS = {"",GENDER_MALE,GENDER_FEMALE};
 
     public static final int[] AGE_GROUP_UP_TO_10 = {0,10};
     public static final int[] AGE_GROUP_UP_TO_20 = {11,20};
@@ -51,6 +63,8 @@ public class Constants {
     public static final String  EMBARK_S = "S";
     public static final String  EMBARK_C = "C";
     public static final String  EMBARK_Q = "Q";
+    public static final String[] PASSENGER_EMBARK_OPTIONS = {"",EMBARK_S,EMBARK_C,EMBARK_Q};
+
 
 
 

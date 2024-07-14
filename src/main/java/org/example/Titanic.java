@@ -1,16 +1,11 @@
 package org.example;
 
 import javax.swing.*;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 class Titanic extends JFrame {
     private List<Passenger> passengers;
-
-    private ManageScreen manageScreen;
     public static void main(String[] args) {
         new Titanic();
     }
