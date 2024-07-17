@@ -130,12 +130,14 @@ public class Passenger implements Comparable<Passenger>{
     }
 
     public boolean sameEmbark(String embark){
-        boolean same=false;
-        if(!embark.equals("") ){
-            if(this.embarkLocation.equals(embark)){
-                same=true;
-            }
-        }else{ same=true;}
+        boolean same=true;
+        if(embark!=null ){
+            if(!embark.isEmpty()){
+                if(!this.embarkLocation.equals(embark)){
+                    same=false;
+                }
+        }
+        }
         return same;
     }
 

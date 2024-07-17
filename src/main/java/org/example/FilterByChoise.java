@@ -241,8 +241,8 @@ public class FilterByChoise {
 
 
 
-        String result = "Total Row: " + this.filteredPassengers.size()+ " Survived: " +
-                countSurvived(this.filteredPassengers) +" dead "+ ( countNotSurvived(this.filteredPassengers));
+        String result = "Total Row: " + this.filteredPassengers.size()+ "\nSurvived: " +
+                countSurvived(this.filteredPassengers) +"\ndead "+ ( countNotSurvived(this.filteredPassengers));
         createNewFileToStoreFilter();
         return result;
     }
@@ -377,7 +377,7 @@ public class FilterByChoise {
         String ticket = dataOfPassenger[9];
         Double fare = Double.valueOf(dataOfPassenger[10].isBlank() ? "-1" : dataOfPassenger[10]);
         String cabin = dataOfPassenger[11];
-        String embarked = null;
+        String embarked = "";
         if (dataOfPassenger.length == 13) {
             embarked = dataOfPassenger[12];
         }
